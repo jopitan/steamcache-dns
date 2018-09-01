@@ -50,7 +50,7 @@ fi
 rm -f ${CACHECONF}
 touch ${CACHECONF}
 
-curl -s -o services.json https://raw.githubusercontent.com/uklans/cache-domains/master/cache_domains.json
+curl -s -o services.json https://raw.githubusercontent.com/jopitan/cache-domains/master/cache_domains.json
 
 cat services.json | jq -r '.cache_domains[] | .name, .domain_files[]' | while read L; do
   if ! echo ${L} | grep "\.txt" >/dev/null 2>&1 ; then
@@ -77,7 +77,7 @@ cat services.json | jq -r '.cache_domains[] | .name, .domain_files[]' | while re
   else
 
     if ! env | grep "DISABLE_${SERVICEUC}=true" >/dev/null 2>&1; then
-      curl -s -o ${L} https://raw.githubusercontent.com/uklans/cache-domains/master/${L}
+      curl -s -o ${L} https://raw.githubusercontent.com/jopitan/cache-domains/master/${L}
     	## files don't have a newline at the end
     	echo "" >> ${L}
     	cat ${L} | grep -v "^#" | while read URL; do
